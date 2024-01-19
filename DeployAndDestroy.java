@@ -77,6 +77,7 @@ public class DeployAndDestroy{
         // Print board
         printBoard(board);
 
+        Boolean passCheck = false;
         int pos = -1;
         int num = -1;
         do {
@@ -85,18 +86,21 @@ public class DeployAndDestroy{
             for (int i = 0; i < positions.length; i++) {
                 if (nums[i] == num) {
                     pos = positions[i];
-                    break;
+                    passCheck = true;
                 }
             }    
-        } while (pos != -1);
+        } while (!passCheck);
 
         // Find if there is an opponent number
         Boolean isLeftMine = false;
         Boolean isRightMine = false;
-        if ((positions[pos-1] - positions[pos]) != 1) {
+        // Check if the position is not at the beginning of the array
+        if (pos > 0 && (positions[pos-1] - positions[pos]) != 1) {
             isLeftMine = true;
         }
-        if ((positions[pos+1] - positions[pos]) != 1) {
+
+        // Check if the position is not at the end of the array
+        if (pos < positions.length - 1 && (positions[pos+1] - positions[pos]) != 1) {
             isRightMine = true;
         }
 
